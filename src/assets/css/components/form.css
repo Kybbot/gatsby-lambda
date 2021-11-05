@@ -1,0 +1,61 @@
+.form__fieldset {
+	border: none;
+	margin-bottom: 40px;
+}
+
+.form__legend,
+.form__label {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--mian-text);
+	margin-bottom: 12px;
+}
+
+.form__legend--max {
+	font-size: 24px;
+}
+
+.form__text {
+	font-size: 24px;
+	font-weight: 700;
+	margin-bottom: 16px;
+}
+
+.form__price {
+	display: inline-block;
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+.form__input {
+	max-width: 80px;
+	height: 56px;
+	font-size: 24px;
+	color: var(--mian-text);
+	padding: 0 18px;
+	border-radius: 2px;
+	border: 1px solid var(--border-color);
+	margin-right: 12px;
+	text-align: center;
+}
+
+.form__input[type="number"] {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	appearance: textfield;
+}
+
+.form__input[type="number"]::-webkit-outer-spin-button,
+.form__input[type="number"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+.form__input:focus {
+	outline: 2px solid blue;
+}
+
+.form__input::placeholder {
+	color: var(--mian-text);
+}

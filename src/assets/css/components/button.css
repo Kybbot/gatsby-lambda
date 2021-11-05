@@ -1,0 +1,15 @@
+.button {
+	font-size: 14px;
+	font-family: "Lato", sans-serif;
+	color: #ffffff;
+	text-transform: uppercase;
+	padding: 12px;
+	border: none;
+	border-radius: 2px;
+	background-color: var(--accent-color);
+	cursor: pointer;
+}
+
+.button:focus {
+	outline: 2px solid blue;
+}

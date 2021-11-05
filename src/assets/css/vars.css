@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	scroll-behavior: smooth;
+}
+
+:root {
+	--bg-color: #ffffff;
+	--mian-text: #131318;
+	--accent-color: #ff464c;
+	--disabled-text: #8c8c8c;
+	--border-color: #c4c4c4;
+	--line-color: #e1e1e1;
+}
