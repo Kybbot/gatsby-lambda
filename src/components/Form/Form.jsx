@@ -168,6 +168,7 @@ const Form = () => {
 					value={form.weeks}
 					onChange={handleInputChange}
 					className="form__input"
+					id="numberInput"
 				/>
 				<span ref={inputText}>weeks</span>
 			</fieldset>
