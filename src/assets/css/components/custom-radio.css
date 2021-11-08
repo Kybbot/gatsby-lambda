@@ -20,7 +20,7 @@
 	opacity: 0.00001;
 }
 
-.custom-radio .custom-radio__input:checked + .custom-radio__text {
+.custom-radio .custom-radio__input-checked + .custom-radio__text {
 	background-color: var(--accent-color);
 	color: #ffffff;
 	border: none;
