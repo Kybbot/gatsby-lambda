@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FC } from "react";
+import { CustomRadioProps } from "../../types/CustomRadio";
 
-const CustomRadio = ({ value, text, toggle, isChecked, name }) => {
+const CustomRadio: FC<CustomRadioProps> = ({ value, text, toggle, isChecked, name }) => {
 	return (
 		<label className="custom-radio">
 			<input
@@ -14,13 +14,6 @@ const CustomRadio = ({ value, text, toggle, isChecked, name }) => {
 			<span className="custom-radio__text">{text}</span>
 		</label>
 	);
-};
-
-CustomRadio.propTypes = {
-	value: PropTypes.number.isRequired,
-	text: PropTypes.number.isRequired,
-	toggle: PropTypes.func.isRequired,
-	isChecked: PropTypes.bool.isRequired,
 };
 
 export default CustomRadio;

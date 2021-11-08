@@ -5,10 +5,10 @@ import CustomRadio from "../CustomRadio/CustomRadio";
 import useInput from "../hooks/useInput";
 
 const Form = () => {
-	const [backDevs, setBackDevs] = useState(null);
-	const [frontDevs, setFrontDevs] = useState(null);
+	const [backDevs, setBackDevs] = useState<number | null>(null);
+	const [frontDevs, setFrontDevs] = useState<number | null>(null);
 	const [weeks, setWeeks] = useInput("4");
-	const [price, setPrice] = useState(0);
+	const [price, setPrice] = useState<number>(0);
 
 	useEffect(() => {
 		const oneDevInWeek = 400;
@@ -16,7 +16,7 @@ const Form = () => {
 		const backendDevsPrice = backDevs * oneDevInWeek;
 		const frontendDevsPrice = frontDevs * oneDevInWeek;
 
-		if (weeks > 12) {
+		if (Number(weeks) > 12) {
 			setPrice((backendDevsPrice + frontendDevsPrice) * 12);
 			return;
 		}
@@ -24,7 +24,7 @@ const Form = () => {
 		setPrice((backendDevsPrice + frontendDevsPrice) * Number(weeks));
 	}, [backDevs, frontDevs, weeks]);
 
-	const toggleRadio = (number, type) => {
+	const toggleRadio = (number: number, type: string) => {
 		if (type === "front") {
 			setFrontDevs(number === frontDevs ? null : number);
 		}
@@ -34,7 +34,7 @@ const Form = () => {
 		}
 	};
 
-	const getRadioButtons = (number, type) => {
+	const getRadioButtons = (number: number, type: string) => {
 		const components = [];
 		const currentValue = type === "front" ? frontDevs : backDevs;
 
@@ -83,7 +83,7 @@ const Form = () => {
 			<fieldset className="form__fieldset">
 				<legend className="form__legend form__legend--max">Total price 🚀</legend>
 				<output className="form__price" name="finalPrice">
-					{`$${new Intl.NumberFormat("ru-RU").format(price)}${weeks > 12 ? "+" : ""}`}
+					{`$${new Intl.NumberFormat("ru-RU").format(price)}${Number(weeks) > 12 ? "+" : ""}`}
 				</output>
 				<div className="line"></div>
 			</fieldset>
