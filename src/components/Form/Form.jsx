@@ -1,160 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../Button/Button";
 import CustomRadio from "../CustomRadio/CustomRadio";
+import useInput from '../hooks/useInput';
 
 const Form = () => {
-	const outputEl = React.useRef(null);
-	const inputText = React.useRef(null);
+	const [backDevs, setBackDevs] = useState(null);
+	const [frontDevs, setFrontDevs] = useState(null);
+	const [weeks, setWeeks] = useInput('4');
+	const [price, setPrice] = useState(0);
 
-	const [form, setForm] = React.useState({
-		backendDevs: null,
-		frontendDevs: null,
-		weeks: 4,
-	});
+	useEffect(() => {
+		if (backDevs && frontDevs && weeks) {
+			const oneDevInWeek = 400;
 
-	const [radioInpitsState, setRadioInputsState] = React.useState({
-		backendDevs: null,
-		frontendDevs: null,
-	});
+			const backendDevsPrice =  backDevs * oneDevInWeek;
+			const frontendDevsPrice = frontDevs * oneDevInWeek;
 
-	const handleInputChange = (event) => {
-		const { name, value } = event.target;
+			if (weeks > 12) {
+				setPrice((backendDevsPrice + frontendDevsPrice) * 12);
+				return;
+			}
 
-		setForm((state) => ({
-			...state,
-			[name]: value,
-		}));
-	};
+			setPrice((backendDevsPrice + frontendDevsPrice) * Number(weeks));
+		}
+	}, [backDevs, frontDevs, weeks]);
 
-	const changeRadioInputsState = (event) => {
-		const input = event.target;
-		const { name } = input;
+	const toggleRadio = (number, type) => {
+		if (type === 'front') {
+			setFrontDevs(number === frontDevs ? null : number);
+		}
 
-		if (radioInpitsState[name] === input) {
-			input.checked = false;
-			setRadioInputsState((state) => ({
-				...state,
-				[name]: null,
-			}));
-			setForm((state) => ({
-				...state,
-				[name]: null,
-			}));
-		} else {
-			setRadioInputsState((state) => ({
-				...state,
-				[name]: input,
-			}));
+		if (type === 'back') {
+			setBackDevs(number === backDevs ? null : number);
 		}
 	};
 
-	const countPrice = React.useCallback(() => {
-		const oneDevInWeek = 400;
-		const locales = "ru-RU";
-		let result;
+	const getRadioButtons = (number, type) => {
+		const components = [];
+		const currentValue = type === 'front' ? frontDevs : backDevs;
 
-		const backendDevsPrice = +form.backendDevs * oneDevInWeek;
-		const frontendDevsPrice = +form.frontendDevs * oneDevInWeek;
-
-		form.weeks === "1"
-			? (inputText.current.textContent = "week")
-			: (inputText.current.textContent = "weeks");
-
-		if (form.weeks > 12) {
-			result = new Intl.NumberFormat(locales).format((backendDevsPrice + frontendDevsPrice) * 12);
-
-			outputEl.current.textContent = "$" + result + "+";
-		} else {
-			result = new Intl.NumberFormat(locales).format(
-				(backendDevsPrice + frontendDevsPrice) * form.weeks
-			);
-
-			outputEl.current.textContent = "$" + result;
+		for (let i = 0; i < number; i++) {
+			components.push(
+				<CustomRadio
+					isChecked={(i+1) === currentValue}
+					name={type}
+					value={i+1}
+					text={i+1}
+					toggle={() => toggleRadio(i+1, type)}
+				/>
+			)
 		}
-	}, [form]);
 
-	React.useEffect(() => {
-		countPrice();
-	}, [form, countPrice]);
+		return components;
+	}
 
 	return (
 		<form className="form" id="form">
 			<fieldset className="form__fieldset">
 				<legend className="form__legend">How many backend devs do you need?</legend>
-				<CustomRadio
-					name="backendDevs"
-					value="1"
-					text="1"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="backendDevs"
-					value="2"
-					text="2"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="backendDevs"
-					value="3"
-					text="3"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="backendDevs"
-					value="4"
-					text="4"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="backendDevs"
-					value="5"
-					text="5"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
+				{getRadioButtons(5, 'back')}
 			</fieldset>
 			<fieldset className="form__fieldset">
 				<legend className="form__legend">How many frontend devs do you need?</legend>
-				<CustomRadio
-					name="frontendDevs"
-					value="1"
-					text="1"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="frontendDevs"
-					value="2"
-					text="2"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="frontendDevs"
-					value="3"
-					text="3"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="frontendDevs"
-					value="4"
-					text="4"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
-				<CustomRadio
-					name="frontendDevs"
-					value="5"
-					text="5"
-					onChangeRadio={handleInputChange}
-					clickHandler={changeRadioInputsState}
-				/>
+				{getRadioButtons(5, 'front')}
 			</fieldset>
 			<fieldset className="form__fieldset">
 				<label className="form__label" htmlFor="numberInput">
@@ -165,17 +74,17 @@ const Form = () => {
 					name="weeks"
 					step="1"
 					min="1"
-					value={form.weeks}
-					onChange={handleInputChange}
+					value={weeks}
+					onChange={setWeeks}
 					className="form__input"
 					id="numberInput"
 				/>
-				<span ref={inputText}>weeks</span>
+				<span>{weeks === '1' && !!weeks ? 'week' : 'weeks'}</span>
 			</fieldset>
 			<fieldset className="form__fieldset">
 				<legend className="form__legend form__legend--max">Total price 🚀</legend>
-				<output ref={outputEl} className="form__price" name="finalPrice">
-					$14400
+				<output className="form__price" name="finalPrice">
+					{`$${new Intl.NumberFormat('ru-RU').format((price))}${weeks > 12 ? '+' : ''}`}
 				</output>
 				<div className="line"></div>
 			</fieldset>
