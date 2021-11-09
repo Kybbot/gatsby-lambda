@@ -7,6 +7,17 @@
 	margin: 24px 0 112px 0;
 }
 
+.header__link {
+	font-size: 18px;
+	color: var(--mian-text);
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.header__link--disabled {
+	color: var(--disabled-text);
+}
+
 .header__title {
 	margin-bottom: 12px;
 }
