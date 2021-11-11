@@ -13,8 +13,8 @@ const Form = () => {
 	useEffect(() => {
 		const oneDevInWeek = 400;
 
-		const backendDevsPrice = backDevs * oneDevInWeek;
-		const frontendDevsPrice = frontDevs * oneDevInWeek;
+		const backendDevsPrice = backDevs ? backDevs * oneDevInWeek : 0;
+		const frontendDevsPrice = frontDevs ? frontDevs * oneDevInWeek : 0;
 
 		if (Number(weeks) > 12) {
 			setPrice((backendDevsPrice + frontendDevsPrice) * 12);

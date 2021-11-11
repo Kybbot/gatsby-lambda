@@ -1,23 +1,37 @@
 {
-  "name": "lambda",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Lambda",
-  "author": "Артём Одийко",
-  "keywords": [
-    "gatsby"
-  ],
-  "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
-  },
-  "dependencies": {
-    "gatsby": "^4.1.0",
-    "gatsby-plugin-i18n": "^1.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  }
+	"name": "lambda",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Lambda",
+	"author": "Артём Одийко",
+	"keywords": [
+		"gatsby"
+	],
+	"scripts": {
+		"develop": "gatsby develop",
+		"start": "gatsby develop",
+		"build": "gatsby build",
+		"serve": "gatsby serve",
+		"clean": "gatsby clean",
+		"lint": "eslint ./src --format stylish --color",
+		"lintFix": "eslint ./src --fix"
+	},
+	"dependencies": {
+		"gatsby": "^4.1.0",
+		"gatsby-plugin-i18n": "^1.0.1",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.3.1",
+		"@typescript-eslint/parser": "^5.3.1",
+		"eslint": "^8.2.0",
+		"eslint-config-airbnb": "^19.0.0",
+		"eslint-config-airbnb-typescript": "^15.0.0",
+		"eslint-plugin-import": "^2.25.3",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-react": "^7.27.0",
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"typescript": "^4.4.4"
+	}
 }

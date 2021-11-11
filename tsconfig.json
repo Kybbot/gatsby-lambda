@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"jsx": "react",
+		"strict": true,
+		"esModuleInterop": true,
+		"baseUrl": "src",
+		"paths": {
+			"@/*": ["*"]
+		}
+	},
+	"include": ["src/**/*", "./gatsby-config.js", "./gatsby-browser.js", "./gatsby-node.js"],
+	"exclude": ["node_modules"]
+}
